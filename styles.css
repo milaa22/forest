@@ -1,0 +1,80 @@
+/* === Изумрудный лес фокусировки: общие стили === */
+:root{--forest-deep:#0b3d2e;--forest-mid:#1a6b4a;--leaf:#3fa86b;--moss:#7fd1a4;--mint:#c8f2d9;--lime-glow:#b8ff9e;--sage:#a8c9b0;--gold-accent:#e8d48a}
+body{--bg1:var(--forest-deep);--bg2:var(--forest-mid);--tx:var(--mint);--card:rgba(26,107,74,.45);--sub:var(--sage)}
+body.day{--bg1:var(--mint);--bg2:var(--moss);--tx:var(--forest-deep);--card:rgba(255,255,255,.55);--sub:var(--forest-mid)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font:16px/1.6 system-ui,sans-serif;color:var(--tx);background:linear-gradient(160deg,var(--bg1),var(--bg2)) fixed;overflow-x:hidden;animation:fin .5s}
+body.out{opacity:0;transition:opacity .25s}
+@keyframes fin{from{opacity:0}}
+h1,h2,h3,.logo{font-family:'Caveat',cursive;margin:.3em 0}
+h1{font-size:clamp(2.6rem,9vw,4.8rem);color:var(--lime-glow);text-shadow:0 0 18px var(--lime-glow);animation:glow 3s infinite alternate}
+body.day h1{color:var(--forest-mid);text-shadow:0 0 14px var(--moss)}
+h2{font-size:2.2rem;color:var(--moss)}
+@keyframes glow{to{text-shadow:0 0 34px var(--lime-glow),0 0 6px var(--moss)}}
+nav{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:10px 16px;background:rgba(11,61,46,.7);backdrop-filter:blur(8px);position:sticky;top:0;z-index:50}
+nav .logo{font-size:1.7rem;color:var(--lime-glow);margin-right:auto}
+nav a{color:var(--mint);text-decoration:none;padding:5px 12px;border-radius:20px;transition:.3s}
+nav a:hover{background:var(--forest-mid)}
+nav a.act{background:var(--mint);color:var(--forest-deep);box-shadow:0 0 14px var(--lime-glow)}
+nav button{font-size:1.1rem}
+main{max-width:980px;margin:0 auto;padding:20px 16px 60px;position:relative;z-index:2}
+.card{background:var(--card);border:1px solid var(--moss);border-radius:18px;padding:18px;margin:14px 0;box-shadow:0 0 18px rgba(127,209,164,.25)}
+.btn,button{font:inherit;cursor:pointer;color:var(--forest-deep);background:var(--moss);border:0;border-radius:24px;padding:8px 20px;transition:.3s;box-shadow:0 0 8px var(--moss)}
+.btn:hover,button:hover,button.on{background:var(--lime-glow);box-shadow:0 0 18px var(--lime-glow);transform:translateY(-2px)}
+.btn{display:inline-block;text-decoration:none}
+.pulse{animation:pulse 2s infinite}
+@keyframes pulse{50%{box-shadow:0 0 28px var(--lime-glow);transform:scale(1.07)}}
+.sub{color:var(--sub)}
+.row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0}
+input{font:inherit;border:1px solid var(--leaf);border-radius:20px;padding:6px 12px;background:var(--mint);color:var(--forest-deep);width:90px}
+/* светлячки за курсором, листики, фоновые листья */
+.fly{position:fixed;width:7px;height:7px;border-radius:50%;background:var(--lime-glow);box-shadow:0 0 10px var(--lime-glow);pointer-events:none;z-index:99;animation:fade .9s forwards}
+.fly.g{background:var(--gold-accent);box-shadow:0 0 8px var(--gold-accent)}
+@keyframes fade{to{opacity:0;transform:translateY(-22px) scale(.3)}}
+.leaf{position:fixed;width:14px;height:14px;background:var(--leaf);border-radius:0 100% 0 100%;pointer-events:none;z-index:1;animation:fall linear forwards}
+.leaf.c{z-index:99;animation:pop .8s forwards}
+@keyframes fall{from{transform:translateY(-5vh) rotate(0)}to{transform:translateY(110vh) rotate(540deg)}}
+@keyframes pop{to{opacity:0;transform:translate(var(--dx),-40px) rotate(180deg)}}
+.deer{position:fixed;left:50%;top:40%;font-size:7rem;transform:translate(-50%,-50%);filter:drop-shadow(0 0 25px var(--lime-glow));z-index:200;animation:fade 1.4s forwards;pointer-events:none}
+/* превью-лес */
+#preview{position:fixed;inset:auto 0 0 0;height:45vh;pointer-events:none;z-index:0;opacity:.6}
+.tree{position:absolute;bottom:0;transform-origin:bottom;clip-path:polygon(50% 0,100% 100%,0 100%);animation:grow 3s ease-out backwards}
+@keyframes grow{from{transform:scaleY(0)}}
+/* таймер */
+.timer{position:relative;width:min(300px,80vw);margin:10px auto}
+.timer svg{width:100%}
+#time{position:absolute;inset:0;display:grid;place-items:center;font-size:3rem;font-family:'Caveat',cursive;color:var(--lime-glow);text-shadow:0 0 12px var(--lime-glow)}
+#ring{transition:stroke-dashoffset .2s linear;filter:drop-shadow(0 0 6px var(--lime-glow))}
+.cloud{position:fixed;top:12%;width:140px;height:40px;border-radius:40px;background:rgba(200,242,217,.18);animation:drift 40s linear infinite;display:none}
+body.focus .cloud{display:block}
+@keyframes drift{from{left:-160px}to{left:105vw}}
+.modal{position:fixed;inset:0;background:rgba(11,61,46,.85);display:none;place-items:center;z-index:150}
+.modal.show{display:grid}
+.modal .card{text-align:center;background:var(--forest-mid);color:var(--mint);max-width:340px}
+/* растения */
+.meadow{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:12px}
+.plant{position:relative;transform-origin:bottom;animation:sway 4s ease-in-out infinite}
+.plant svg{width:100%;overflow:visible}
+.plant:hover::after{content:attr(data-tip);position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:var(--forest-deep);color:var(--mint);padding:4px 8px;border-radius:8px;font-size:12px;white-space:nowrap;z-index:5}
+.plant.new{animation:born 1.5s}
+@keyframes sway{50%{transform:rotate(3deg)}}
+@keyframes born{from{transform:scale(0);filter:drop-shadow(0 0 0)}60%{transform:scale(1.3);filter:drop-shadow(0 0 20px var(--lime-glow))}}
+.gl{animation:breathe 3s ease-in-out infinite alternate;filter:drop-shadow(0 0 3px #b8ff9e)}
+@keyframes breathe{to{opacity:.6}}
+/* советы */
+.tip{opacity:0;transform:translateY(24px);transition:.7s}
+.tip.vis{opacity:1;transform:none}
+.tip h3{margin:0;color:var(--moss);font-size:1.6rem}
+#rnd{perspective:900px}
+#rnd .card{animation:flip .8s}
+@keyframes flip{from{transform:rotateY(90deg);box-shadow:0 0 40px var(--lime-glow)}}
+blockquote{font-family:'Caveat',cursive;font-size:1.5rem;border-left:3px solid var(--lime-glow);padding-left:14px;margin:12px 0}
+label.chk{display:block;padding:4px 0;cursor:pointer}
+.bar{height:14px;background:rgba(0,0,0,.3);border-radius:8px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--leaf),var(--lime-glow));box-shadow:0 0 10px var(--lime-glow);transition:width 1s}
+.ach{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.ach .card{text-align:center;margin:0;opacity:.45}
+.ach .card.got{opacity:1}
+canvas{width:100%;max-width:640px}
+details{margin:8px 0}summary{cursor:pointer;color:var(--moss);font-weight:600}
+@media(max-width:600px){nav .logo{width:100%}}

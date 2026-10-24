@@ -1,0 +1,13 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Focus Timer — Emerald Forest</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"></head>
+<body data-page="timer"><main>
+<h2>Focus Timer</h2><p class="sub" id="note"></p>
+<div class="row"><button data-m="15">15</button><button data-m="25" class="on">25</button><button data-m="45">45</button><button data-m="60">60</button>
+<input id="custom" type="number" min="1" max="240" placeholder="min"><button id="setc">Custom</button></div>
+<div class="timer"><svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" fill="none" stroke="rgba(0,0,0,.3)" stroke-width="10"/>
+<circle id="ring" cx="100" cy="100" r="90" fill="none" stroke="#b8ff9e" stroke-width="10" stroke-linecap="round" transform="rotate(-90 100 100)"/></svg><div id="time">25:00</div></div>
+<div class="row"><button id="start">▶ Start</button><button id="pause">⏸ Pause</button><button id="reset">↺ Reset</button></div>
+<div class="cloud"></div><div class="cloud" style="top:25%;animation-delay:-18s"></div><div id="flies"></div>
+<div class="modal" id="modal"><div class="card"><h2>Congratulations, traveler! 🎉</h2><p>Session complete — a new resident has grown in your forest:</p><div id="newplant"></div>
+<a class="btn" href="forest.html">See the forest</a> <button id="close">Another round</button></div></div>
+</main><script src="script.js"></script></body></html>
